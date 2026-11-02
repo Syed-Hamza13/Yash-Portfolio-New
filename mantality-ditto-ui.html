@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mantality — A stronger mind. A fuller life.</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{ink:'#464d77',sun:'#ffdb1e',lav:'#c6c8ee',sage:'#dce7dc',peach:'#eee0d7',forest:'#4a7c59',paper:'#f9fafd'},fontFamily:{display:['Bricolage Grotesque','system-ui','sans-serif'],body:['DM Sans','system-ui','sans-serif'],serif:['Instrument Serif','Georgia','serif']}}}}
+</script>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth}
+body{background:#f9fafd;color:#464d77;font-family:'DM Sans',system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-.03em}
+.sw{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400}
+.rv{opacity:0;transform:translateY(28px);transition:all .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.btn{position:relative;display:inline-flex;align-items:center;gap:.6rem;border-radius:999px;padding:.55rem .6rem .55rem 1.3rem;font-weight:600;font-size:.9rem;background:#ffdb1e;color:#464d77;overflow:hidden;transition:transform .3s}
+.btn i{display:grid;place-items:center;width:2rem;height:2rem;border-radius:99px;background:#464d77;color:#fff;font-style:normal;transition:transform .3s}
+.btn:hover{transform:translateY(-2px)}.btn:hover i{transform:translateX(3px) rotate(-45deg)}
+@keyframes marq{to{transform:translateX(-50%)}}
+.track{display:flex;width:max-content;animation:marq 32s linear infinite}
+.track.rev{animation-direction:reverse}
+@keyframes fl{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-12px) rotate(var(--r,0deg))}}
+.fl{animation:fl 5s ease-in-out infinite}
+.stack{display:flex;justify-content:center;padding:3rem 0 4rem}
+.tc{width:250px;min-height:290px;flex:none;margin-left:-110px;border-radius:24px;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;transform:rotate(var(--r));transition:transform .5s cubic-bezier(.2,.7,.2,1),z-index 0s;box-shadow:0 10px 30px -12px rgba(70,77,119,.35)}
+.tc:first-child{margin-left:0}
+.stack:hover .tc{transform:translateX(var(--x,0)) rotate(0)}
+.tc:hover{transform:translateY(-28px) scale(1.08) rotate(0)!important;z-index:20!important}
+@media(max-width:768px){.stack{overflow-x:auto;justify-content:flex-start;padding-left:2rem}.tc{margin-left:-150px}}
+.faq p{max-height:0;overflow:hidden;transition:max-height .4s,padding .4s;padding:0 1.5rem}
+.faq.open p{max-height:140px;padding:0 1.5rem 1.25rem}
+.faq.open .ch{transform:rotate(90deg)}
+.av{border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;border:3px solid #f9fafd}
+
+.hero-photo {
+  background: #464d7700;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(26, 29, 43, 0.12) 0%,
+      rgba(36, 40, 67, 0.08) 34%,
+      rgba(56, 62, 102, 0.01) 100%
+    ),
+    url("./hero.jpeg");
+  background-size: cover;
+  background-position: center 36%;
+  background-attachment: fixed;   /* keeps image pinned while scrolling */
+  isolation: isolate;
+  position: sticky;
+  top: 0;
+  z-index: 0;                     /* background layer */
+  min-height: 690px;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;           /* so it never blocks clicks on content above */
+}
+
+.hero-photo-shade{background:linear-gradient(90deg,rgba(27, 31, 48, 0),transparent 42%,rgba(27,31,48,.12));z-index:0}
+.hero-photo header{position:relative;z-index:2}
+.hero-photo header nav{box-shadow:0 8px 30px rgba(20,24,45,.08)}
+.hero-photo h1{font-size:clamp(2.8rem,6.5vw,5.7rem);letter-spacing:-.055em;text-shadow:0 2px 24px rgba(20,24,45,.15)}
+.hero-photo .btn{font-size:.78rem;padding:.25rem .3rem .25rem .85rem}
+.hero-photo .btn i{width:1.7rem;height:1.7rem}
+.approach-person{object-position:center top;filter:drop-shadow(0 14px 24px rgba(70,77,119,.12));mask-image:linear-gradient(#000 78%,transparent 100%)}
+.journal-photo img{display:block}
+#comm{background-image:linear-gradient(rgba(63,70,112,.78),rgba(63,70,112,.88)),url("./yash-profile.png");background-size:cover;background-position:center}
+#comm .community-photo{position:absolute;display:block;object-fit:cover;border:3px solid rgba(255,255,255,.28);border-radius:17px;box-shadow:0 12px 30px rgba(24,28,56,.2);opacity:.62}
+#comm .community-photo:nth-of-type(odd){border-radius:18px 18px 18px 6px}
+.av{overflow:hidden;background-size:cover;background-position:center;color:transparent!important;text-indent:-999px;flex:none}
+.tc{width:clamp(190px,19vw,250px);min-height:270px}
+@media(max-width:640px){.hero-photo{background-position:center 28%;min-height:570px}.hero-photo h1{font-size:clamp(2.45rem,11vw,4rem)}.hero-photo header{padding-top:1rem;padding-bottom:1rem}.hero-photo header>a{font-size:1rem}#comm{min-height:470px}.approach-person{width:210px;height:310px}.tc{width:205px;min-height:260px}}
+
+@media(prefers-reduced-motion:reduce){.track,.fl{animation:none}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="p-2 md:p-3">
+<div class="hero-photo relative rounded-[28px] overflow-hidden min-h-[690px] md:min-h-[750px] flex flex-col">
+  <header
+  id="site-header"
+  style="position: fixed; top: 0; left: 0; right: 0; z-index: 99999; will-change: transform;"
+  class="flex items-center justify-between px-5 md:px-8 py-5 transition-colors duration-300"
+>
+  <a href="#" class="font-display font-semibold text-white text-xl flex items-center gap-2">
+    <span class="text-2xl">▲</span>mantality<sup class="text-[10px]">®</sup>
+  </a>
+
+  <nav class="hidden md:flex items-center gap-1 bg-white/15 backdrop-blur rounded-full p-1 text-sm text-white">
+    <a class="px-4 py-1.5 rounded-full bg-white text-ink" href="#">Home</a>
+    <a class="px-4 py-1.5" href="#offerings">Coaches</a>
+    <a class="px-4 py-1.5" href="#journal">Journal</a>
+    <a class="px-4 py-1.5" href="#faq">More Pages ⌄</a>
+  </nav>
+
+  <div class="flex items-center gap-3 text-sm">
+    <a class="text-white/90 hidden sm:block" href="#">Sign In</a>
+    <a href="#cta" class="bg-sun text-ink font-semibold rounded-full px-5 py-2 hover:scale-105 transition">
+      Get started
+    </a>
+  </div>
+</header=987?.,MN   `-=
+  <div class="hero-photo-shade absolute inset-0 pointer-events-none"></div>
+  <!-- <div class="absolute inset-x-0 bottom-0 h-3/5" style="background:linear-gradient(to top,#464d77 25%,transparent)"></div> -->
+  <div class="relative z-10 mt-auto text-center text-white px-5 pb-12 md:pb-16">
+    <a href="#offerings" class="btn mb-6">Explore ways to grow <i>→</i></a>
+    <p class="text-sm md:text-base text-white/85 mb-3 max-w-md mx-auto">Coaching, connection, and a space to become more of the man you already are.</p>
+    <h1 class="text-5xl md:text-8xl font-semibold leading-[1]" id="h1">A stronger mind.<br>A fuller life.</h1>
+  </div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="max-w-6xl mx-auto px-5 py-20 md:py-28 grid md:grid-cols-2 gap-12">
+  <div class="rv">
+    <p class="text-xs tracking-widest mb-4 opacity-70">ABOUT MANTALITY</p>
+    <h2 class="text-4xl md:text-5xl font-medium leading-tight">A space to grow.<br>A life that feels <span class="sw text-[1.1em]">like yours.</span></h2>
+    <div class="flex items-center gap-4 mt-8"><div class="flex -space-x-3 av-row"></div><div class="text-sm"><b>Growing together.</b><br><span class="opacity-70"><b>18000+</b> men have taken the step.</span></div></div>
+  </div>
+  <div class="rv">
+    <p class="text-xl md:text-2xl font-medium leading-snug mb-5">You’re more than what you do, what you carry, or what others expect of you.</p>
+    <p class="opacity-75 mb-3">Mantality is a space for men to slow down, get honest, and find a way forward. Through self-paced classes, one-on-one coaching, practical resources, and a digital community, we help you make room for your wellbeing in everyday life.</p>
+    <p class="opacity-75">Start where you are. Build at your own pace. Find support that helps you feel more connected to yourself and the people around you.</p>
+    <div class="grid grid-cols-3 gap-3 mt-8">
+      <div class="bg-lav rounded-2xl p-4"><small>Capacity</small><div class="font-display text-3xl md:text-4xl font-semibold mt-3"><span data-n="20">0</span>+</div><small class="opacity-70">Accredited coaches</small></div>
+      <div class="bg-sun/80 rounded-2xl p-4"><small>Library</small><div class="font-display text-3xl md:text-4xl font-semibold mt-3"><span data-n="130">0</span>+</div><small class="opacity-70">Curated resources</small></div>
+      <div class="bg-sage rounded-2xl p-4"><small>Community</small><div class="font-display text-3xl md:text-4xl font-semibold mt-3"><span data-n="3000">0</span>+</div><small class="opacity-70">Daily active members</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- RIBBONS -->
+<div class="relative h-44 md:h-52 overflow-hidden my-4">
+  <div class="absolute -inset-x-10 top-6 bg-sun text-ink py-3 -rotate-[3deg]"><div class="track rev rib" data-w="COACHING,FINANCE,RELATIONSHIPS,CAREER,FITNESS,FAMILY,HEALTH"></div></div>
+  <div class="absolute -inset-x-10 top-[4.5rem] md:top-20 bg-ink text-white py-3 rotate-[3deg]"><div class="track rib" data-w="PURPOSE,INTIMACY,COMMUNITY,FAITH,MASCULINITY,LEGACY,SELF-CARE"></div></div>
+</div>
+
+<!-- OFFERINGS -->
+<section id="offerings" class="max-w-7xl mx-auto px-5 py-20">
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 rv">
+    <div><p class="text-xs tracking-widest mb-4 opacity-70">MAKE SPACE FOR YOURSELF</p><h2 class="text-4xl md:text-5xl font-medium leading-tight">Different paths.<br>The same way <span class="sw text-[1.1em]">forward.</span></h2></div>
+    <p class="text-sm opacity-75 max-w-xs md:text-right">There’s no one way to grow. Find the support that meets you where you are — and helps you get where you want to be.</p>
+  </div>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" id="cards"></div>
+</section>
+
+<!-- APPROACH -->
+<section class="max-w-5xl mx-auto px-5 py-20 text-center">
+  <div class="rv"><p class="text-xs tracking-widest mb-4 opacity-70">LET’S REDEFINE STRONG</p><h2 class="text-4xl md:text-5xl font-medium leading-tight">Less holding it in.<br>More <span class="sw text-[1.1em]">opening up.</span></h2></div>
+  <div class="relative h-[360px] md:h-[440px] mt-8 mx-auto max-w-3xl">
+    <img class="approach-person absolute left-1/2 bottom-0 -translate-x-1/2 w-[240px] md:w-[300px] h-[330px] md:h-[400px] object-cover object-top rounded-t-[140px]" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=85" alt="A man reflecting with confidence" loading="lazy">
+    <span class="bd fl absolute left-0 md:left-4 top-[48%]">🧠 Heal and overcome <b>childhood trauma</b></span>
+    <span class="bd fl absolute left-2 md:left-14 top-[68%] bg-sun/90" style="animation-delay:-1s">⭐ Become the man you’re <b>destined to be</b></span>
+    <span class="bd fl absolute right-0 md:right-6 top-[42%] bg-sage" style="animation-delay:-2s">🤝 Build solid, <b>lasting relationships</b></span>
+    <span class="bd fl absolute right-2 md:right-0 top-[64%] bg-peach" style="animation-delay:-3s">💰 Make <b>healthier financial decisions</b></span>
+  </div>
+  <p class="max-w-2xl mx-auto opacity-75 mt-4 rv">Somewhere along the way, being a man became about having all the answers. Keeping it together. Going it alone.<br><br>We believe there’s another way. One where strength means being honest with yourself. Asking for support. And making space for the person you want to become.</p>
+</section>
+<style>.bd{background:#c6c8ee;border-radius:99px;padding:.55rem 1rem;font-size:.75rem;box-shadow:0 8px 24px -10px rgba(70,77,119,.4);white-space:nowrap}@media(max-width:640px){.bd{font-size:.62rem;padding:.4rem .7rem}}</style>
+
+<!-- COMMUNITY -->
+<section class="p-2 md:p-3">
+<div class="relative bg-ink rounded-[28px] overflow-hidden min-h-[520px] md:min-h-[600px] grid place-items-center text-center text-white" id="comm">
+  <div class="relative z-10 px-5 rv">
+    <h2 class="text-4xl md:text-6xl font-medium leading-tight">Your people are<br><span class="sw text-[1.1em]">out there.</span> Find them here.</h2>
+    <p class="mt-6 text-white/80 max-w-md mx-auto text-sm">Life feels different when you don’t carry it alone. Connect with men who are showing up, doing the work, and figuring it out. Just like you.</p>
+    <a href="#cta" class="btn mt-8">Join Mantality <i>→</i></a>
+  </div>
+</div>
+</section>
+
+<!-- JOURNAL -->
+<section id="journal" class="max-w-7xl mx-auto px-5 py-24 grid lg:grid-cols-[1fr_2fr] gap-10">
+  <div class="rv"><p class="text-xs tracking-widest mb-4 opacity-70">THE MANTALITY JOURNAL</p><h2 class="text-4xl font-medium leading-tight">A little perspective.<br><span class="sw text-[1.1em]">A way forward.</span></h2><p class="opacity-75 my-5 text-sm max-w-xs">Thoughtful reads on everyday growth, honest conversations, and building a life that feels like yours.</p><a href="#" class="btn">All Articles <i>→</i></a></div>
+  <div class="grid sm:grid-cols-2 gap-4">
+    <article class="rv bg-peach rounded-3xl p-5 group"><div class="journal-photo h-40 rounded-2xl mb-5 overflow-hidden relative"><img class="w-full h-full object-cover transition duration-700 group-hover:scale-105" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85" alt="A quiet moment outdoors" loading="lazy"><span class="absolute top-3 right-3 bg-white/90 text-xs rounded-full px-3 py-1">Everyday growth</span></div><p class="text-xs opacity-60">Published on September 10, 2026</p><h3 class="text-2xl font-medium my-3 leading-tight">5 small ways to make space for yourself</h3><a class="text-sm font-semibold group-hover:underline" href="#">Read More →</a></article>
+    <article class="rv bg-sage rounded-3xl p-5 group"><div class="journal-photo h-40 rounded-2xl mb-5 overflow-hidden relative"><img class="w-full h-full object-cover transition duration-700 group-hover:scale-105" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85" alt="People sharing a thoughtful conversation" loading="lazy"><span class="absolute top-3 right-3 bg-white/90 text-xs rounded-full px-3 py-1">Connection</span></div><p class="text-xs opacity-60">Published on September 10, 2026</p><h3 class="text-2xl font-medium my-3 leading-tight">You don’t need the perfect words to open up</h3><a class="text-sm font-semibold group-hover:underline" href="#">Read More →</a></article>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section class="max-w-6xl mx-auto px-5 py-16 text-center overflow-hidden">
+  <div class="rv"><p class="text-xs tracking-widest mb-4 opacity-70">SMALL STEPS. MEANINGFUL SHIFTS.</p><h2 class="text-4xl md:text-5xl font-medium leading-tight">Different stories.<br><span class="sw text-[1.1em]">A shared way forward.</span></h2><p class="opacity-70 mt-4 text-sm">More clarity. More connection. More room to be yourself.</p></div>
+  <div class="stack" id="stack"></div>
+  <div class="flex items-center justify-center gap-4"><div class="flex -space-x-3 av-row"></div><div class="text-sm text-left"><b>Global community.</b><br><span class="opacity-70"><b>18000+</b> men trust Mantality</span></div></div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="max-w-6xl mx-auto px-5 py-20 grid md:grid-cols-2 gap-10">
+  <div class="rv"><p class="text-xs tracking-widest mb-4 opacity-70">A LITTLE MORE CLARITY</p><h2 class="text-4xl md:text-5xl font-medium leading-tight">Good questions.<br><span class="sw text-[1.1em]">Honest answers.</span></h2></div>
+  <div class="space-y-3" id="faqs"></div>
+</section>
+
+<!-- CTA + FOOTER -->
+<section class="p-2 md:p-3" id="cta">
+<div class="bg-lav/60 rounded-[28px] overflow-hidden">
+  <div class="relative text-center pt-6 pb-16 px-5">
+    <div class="relative h-[260px] md:h-[340px] max-w-4xl mx-auto" id="orbit">
+      <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1000 340" fill="none" preserveAspectRatio="none"><path d="M 74 330 A 472 472 0 0 1 926 330" stroke="#464d77" stroke-opacity=".2" stroke-dasharray="4 6"/><path d="M 165 330 A 392 392 0 0 1 835 330" stroke="#464d77" stroke-opacity=".2" stroke-dasharray="4 6"/></svg>
+    </div>
+    <h2 class="text-4xl md:text-5xl font-medium">Take the first step</h2>
+    <p class="opacity-75 mt-3 max-w-sm mx-auto text-sm">Start with a little more honesty, a little more support, and a path that feels like yours.</p>
+    <a href="#" class="btn mt-7">Find your path <i>→</i></a>
+  </div>
+  <footer class="bg-ink text-white rounded-[28px] m-2 md:m-3 p-6 md:p-10 overflow-hidden">
+    <div class="grid md:grid-cols-2 gap-10">
+      <div><h3 class="text-xl font-medium mb-4">A little perspective, delivered to your inbox.</h3>
+        <form onsubmit="event.preventDefault();this.querySelector('p').textContent='Thanks — you’re subscribed.'"><div class="flex bg-white/10 rounded-full p-1 max-w-md"><input required type="email" placeholder="Enter your email" aria-label="Email address" class="bg-transparent flex-1 px-4 outline-none text-sm placeholder-white/60 min-w-0"><button class="bg-sun text-ink font-semibold text-sm rounded-full px-5 py-2.5 hover:scale-105 transition">Subscribe</button></div><p class="text-xs text-white/60 mt-3">Thoughtful reads, fresh perspectives, and a little room to grow.</p></form>
+        <div class="flex gap-3 mt-6 text-white/80 text-sm"><span>Facebook</span><span>Instagram</span><span>X</span><span>TikTok</span></div></div>
+      <nav class="grid grid-cols-3 gap-4 text-sm text-white/75">
+        <div class="space-y-2"><b class="text-white block mb-3">Explore</b><a class="block" href="#">Our approach</a><a class="block" href="#offerings">Ways to grow</a><a class="block" href="#">Member stories</a><a class="block" href="#faq">FAQs</a></div>
+        <div class="space-y-2"><b class="text-white block mb-3">Your people</b><a class="block" href="#">The community</a><a class="block" href="#journal">The Journal</a><a class="block" href="#">Membership</a></div>
+        <div class="space-y-2"><b class="text-white block mb-3">Find your path</b><a class="block" href="#offerings">Self-paced classes</a><a class="block" href="#offerings">One-on-one coaching</a><a class="block" href="#offerings">Resource library</a></div>
+      </nav>
+    </div>
+    <div class="font-display font-bold tracking-tighter leading-none text-center mt-12 select-none" style="font-size:clamp(3.5rem,19vw,17rem)">mantality<sup class="text-[.12em] align-top">®</sup></div>
+  </footer>
+</div>
+</section>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const cols=['#8a7fb8','#d9a441','#4a7c59','#c47a62','#6f8aa6','#b0708f','#5a6a9a'];
+const peoplePhotos=['photo-1500648767791-00dcc994a43e','photo-1506794778202-cad84cf45f1d','photo-1534528741775-53994a69daeb','photo-1507003211169-0a1dd7228f2d','photo-1544005313-94ddf0286df2','photo-1501196354995-cbb51c65aaea','photo-1508214751196-bcfd4ca60f91'];
+const av=(i,s=44)=>`<span class="av" role="img" aria-label="Community member" style="width:${s}px;height:${s}px;background-image:url(https://images.unsplash.com/${peoplePhotos[i%peoplePhotos.length]}?auto=format&fit=crop&w=120&h=120&q=80);"></span>`;
+$$('.av-row').forEach(r=>r.innerHTML=[0,1,2,3].map(i=>av(i,48)).join(''));
+// ribbons
+$$('.rib').forEach(r=>{const w=r.dataset.w.split(',').map(x=>`<span class="mx-4 font-display font-semibold text-xl md:text-2xl">${x}</span><span class="mx-2">✳</span>`).join('');r.innerHTML=`<div class="flex">${w.repeat(4)}</div><div class="flex">${w.repeat(4)}</div>`});
+// cards
+const C=[['lav','🧠','SELF-PACED CLASSES','Progress at your own pace.','Small steps. Meaningful shifts. Build a stronger foundation with classes that fit your life.','Explore classes'],['sun/80','💬','ONE-ON-ONE COACHING','Real talk. Real growth.','A space to be heard, challenged, and supported. Find your next step with a coach in your corner.','Explore coaching'],['sage','🛠️','RESOURCE LIBRARY','Tools for the everyday.','Less overthinking. More doing. Practical guides and exercises for wherever life finds you.','Explore resources'],['peach','🤝','THE MANTALITY COMMUNITY','Better, together.','Find your people. An exclusive digital space for honest conversations and shared growth.','Explore the community']];
+$('#cards').innerHTML=C.map((c,i)=>`<button class="rv group text-left bg-${c[0]} rounded-3xl p-6 min-h-[380px] flex flex-col justify-between transition hover:-translate-y-2 hover:shadow-xl" style="transition-delay:${i*90}ms"><span class="text-5xl block group-hover:scale-110 transition">${c[1]}</span><div><p class="text-[11px] tracking-widest opacity-70 mb-2">${c[2]}</p><h3 class="text-2xl font-medium leading-tight mb-3">${c[3]}</h3><p class="text-sm opacity-75">${c[4]}</p></div><span class="flex items-center justify-between text-sm font-semibold">${c[5]}<i class="not-italic grid place-items-center w-9 h-9 rounded-full bg-ink text-white group-hover:rotate-45 transition">↗</i></span></button>`).join('');
+// stories
+const T=[['#c6c8ee','#464d77','Cape Town','I stopped waiting for a perfect moment and started making a little space for myself.','Alex Peretti',-8],['#ffdb1e','#464d77','New York','Having space to talk helped me see the next step more clearly.','Oliver Reed',5],['#4a7c59','#fff','Copenhagen','The small things became the things I could come back to on a difficult day.','Jamie Ellis',-3],['#464d77','#fff','Dubai','It felt good to realise I didn’t have to figure everything out on my own.','Noah Bennet',6],['#eee0d7','#464d77','London','I’m learning to say what I need, instead of hoping someone will notice.','Sam Mitchell',-8],['#dce7dc','#464d77','Los Angeles','Making time for myself helped me show up more fully for the people I care about.','Ethan Cole',5]];
+$('#stack').innerHTML=T.map((t,i)=>`<article class="tc text-left" style="background:${t[0]};color:${t[1]};--r:${t[5]}deg;--x:${(i-2.5)*18}px;z-index:${i+1}"><div class="flex justify-between items-center"><span class="text-2xl">❝</span><span class="text-xs rounded-full px-3 py-1" style="background:${t[1]};color:${t[0]}">📍 ${t[2]}</span></div><p class="font-display text-lg leading-snug my-4">“${t[3]}”</p><div class="flex items-center justify-between text-sm"><span class="flex items-center gap-2">${av(i,32)}${t[4]}</span><span>0${i+1} ↗</span></div></article>`).join('');
+// faq
+const F=[['Who is Mantality for?','Mantality is for men who want to understand themselves better, build healthier habits, and feel more connected. You don’t need to have it all figured out to start.'],['Where should I start?','Pick whatever feels easiest: a self-paced class, a journal article, or a first coaching conversation. You can change direction anytime.'],['Is coaching the same as therapy?','No. Coaching focuses on goals and next steps. Therapy treats mental health conditions. Many members use both.'],['Can I work at my own pace?','Yes. Classes and resources are self-paced, and coaching sessions are scheduled around your life.']];
+$('#faqs').innerHTML=F.map((f,i)=>`<div class="faq rv rounded-2xl ${i?'bg-lav/50':'bg-lav open'}"><button class="w-full flex justify-between items-center p-5 text-left font-medium text-sm">${f[0]}<span class="ch grid place-items-center w-8 h-8 rounded-full bg-ink text-white transition">›</span></button><p class="text-sm opacity-80">${f[1]}</p></div>`).join('');
+$$('.faq button').forEach(b=>b.onclick=()=>{const f=b.parentElement,o=f.classList.contains('open');$$('.faq').forEach(x=>x.classList.remove('open'));if(!o)f.classList.add('open')});
+// floating community avatars
+const cm=$('#comm');for(let i=0;i<14;i++){const a=i/14*Math.PI*2,rx=44,ry=40;const d=document.createElement('div');d.className='absolute fl';d.style.cssText=`left:${50+Math.cos(a)*rx}%;top:${50+Math.sin(a)*ry}%;--r:${(i%5-2)*6}deg;animation-delay:${-i*.5}s;opacity:.55;transform:translate(-50%,-50%)`;d.innerHTML=`<img class="community-photo" alt="Community member" loading="lazy" src="https://images.unsplash.com/${peoplePhotos[i%peoplePhotos.length]}?auto=format&fit=crop&w=220&h=220&q=80" style="width:${58+(i%3)*14}px;height:${58+(i%3)*14}px;transform:rotate(${(i%5-2)*9}deg)">`;cm.appendChild(d)}
+// orbit
+const ob=$('#orbit');for(let i=0;i<8;i++){const t=(i+.5)/8,a=Math.PI*(1-t),r=i%2?.46:.38;const d=document.createElement('div');d.className='absolute fl';d.style.cssText=`left:${50+Math.cos(a)*r*100}%;top:${96-Math.sin(a)*r*190}%;animation-delay:${-i*.6}s;transform:translate(-50%,-50%)`;d.innerHTML=i%3==1?`<span class="grid place-items-center w-11 h-11 md:w-14 md:h-14 rounded-full bg-sun text-xl">✳</span>`:av(i,i%2?44:54);ob.appendChild(d)}
+// reveal + count
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');$$('[data-n]',e.target).forEach(n=>{const to=+n.dataset.n,t0=performance.now();(function f(t){const p=Math.min((t-t0)/1800,1);n.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)});io.unobserve(e.target)}}),{threshold:.2});
+$$('.rv').forEach(e=>io.observe(e));
+</script>
+</body>
+</html>
