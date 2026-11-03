@@ -1,5 +1,3 @@
-import { type ClassValue } from 'tailwindcss/types'
-
 /**
  * Conditionally join class names
  */
