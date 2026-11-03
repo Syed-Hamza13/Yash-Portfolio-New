@@ -14,8 +14,8 @@ export default function HeroSection({ content, profile }: HeroSectionProps) {
   const ctaLink = content?.cta_link || '/work'
 
   return (
-    <section className="p-2 sm:p-3 md:p-4">
-      <div className="relative rounded-[28px] overflow-hidden min-h-[85vh] md:min-h-[92vh] flex flex-col justify-between p-6 sm:p-10 md:p-14 bg-ink shadow-2xl">
+    <section className="p-1 sm:p-2 md:p-2.5">
+      <div className="relative rounded-[24px] overflow-hidden min-h-[88vh] md:min-h-[94vh] flex flex-col justify-between p-6 sm:p-10 md:p-14 bg-ink shadow-2xl">
         {/* Background Image with Fixed-Feel Overlay */}
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-85 transition-transform duration-1000 scale-[1.01]"
@@ -31,7 +31,7 @@ export default function HeroSection({ content, profile }: HeroSectionProps) {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-ink/20 to-ink/80" />
 
         {/* Top Spacer for Fixed Nav clearance */}
-        <div className="relative z-10 pt-16 md:pt-20 flex items-center justify-between">
+        <div className="relative z-10 pt-20 md:pt-24 flex items-center justify-between">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-medium text-white/90">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>Open for select freelance & brand commissions</span>

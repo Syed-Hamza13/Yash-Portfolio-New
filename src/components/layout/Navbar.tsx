@@ -46,10 +46,11 @@ export default function Navbar() {
       <header
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+          scrolled ? 'pt-0' : 'pt-2 sm:pt-3',
           headerBg
         )}
       >
-        <div className="container-main flex items-center justify-between py-4">
+        <div className="container-main flex items-center justify-between py-3 sm:py-3.5">
           {/* Logo */}
           <Link
             to="/"
