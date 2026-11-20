@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect, useCallback } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { getPublishedProjects } from '@/services/projects'
 import type { Project } from '@/types'
+import ImageLightbox from '@/components/portfolio/ImageLightbox'
 
 // Category Section Definition interface
 interface CategorySection {
@@ -172,8 +172,53 @@ export default function PortfolioPage() {
   const [activeTab, setActiveTab] = useState<'ALL' | 'POSTS' | 'STORIES' | 'REELS' | 'THUMBNAILS'>('ALL')
   const [dbProjects, setDbProjects] = useState<Project[]>([])
 
+  // Lightbox state
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [lightboxItems, setLightboxItems] = useState<PortfolioItem[]>([])
+  const [lightboxIndex, setLightboxIndex] = useState(0)
+  const [originRect, setOriginRect] = useState<DOMRect | null>(null)
+  const [activeItemId, setActiveItemId] = useState<string | null>(null)
+
+  console.log('[MONITOR] PortfolioPage RENDER', { activeItemId, lightboxOpen, lightboxIndex })
+
   useEffect(() => {
     getPublishedProjects().then(setDbProjects).catch(console.error)
+  }, [])
+
+  const openLightbox = useCallback((items: PortfolioItem[], index: number, e?: React.MouseEvent<HTMLElement>) => {
+    if (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+    const item = items[index]
+    const cardEl = document.getElementById(`portfolio-card-${item.id}`)
+    const rect = cardEl ? cardEl.getBoundingClientRect() : null
+    console.log('[MONITOR] openLightbox CLICKED', {
+      itemId: item.id,
+      rect: rect ? { left: rect.left, top: rect.top, width: rect.width, height: rect.height } : null
+    })
+
+    setLightboxItems(items)
+    setLightboxIndex(index)
+    setOriginRect(rect)
+    setActiveItemId(item.id)
+    setLightboxOpen(true)
+  }, [])
+
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false)
+  }, [])
+
+  const navigateLightbox = useCallback((index: number) => {
+    setLightboxIndex(index)
+    if (lightboxItems[index]) {
+      setActiveItemId(lightboxItems[index].id)
+    }
+  }, [lightboxItems])
+
+  const handleLightboxExited = useCallback(() => {
+    setActiveItemId(null)
+    setOriginRect(null)
   }, [])
 
   return (
@@ -297,11 +342,14 @@ export default function PortfolioPage() {
 
         {/* 4x2 Grid of Pure White Rounded Tiles */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          {UI_CATEGORIES[0].items.map((item) => (
-            <Link
+          {UI_CATEGORIES[0].items.map((item, idx) => (
+            <button
               key={item.id}
-              to={`/work/${item.slug}`}
-              className="group block rounded-3xl overflow-hidden bg-[#121320] border border-white/10 p-3 hover:border-amber-400/50 hover:shadow-xl transition-all duration-300"
+              id={`portfolio-card-${item.id}`}
+              onClick={(e) => openLightbox(UI_CATEGORIES[0].items, idx, e)}
+              className={`group block rounded-3xl overflow-hidden bg-[#121320] border border-white/10 p-3 hover:border-amber-400/50 hover:shadow-xl transition-[border-color,box-shadow,transform] duration-300 will-change-transform text-left cursor-pointer ${
+                activeItemId === item.id ? 'opacity-0 pointer-events-none' : 'opacity-100'
+              }`}
             >
               <div className="aspect-square rounded-2xl overflow-hidden bg-white flex items-center justify-center p-3 relative">
                 <img
@@ -316,7 +364,7 @@ export default function PortfolioPage() {
                   {item.tag}
                 </span>
               </div>
-            </Link>
+            </button>
           ))}
         </div>
       </section>
@@ -361,11 +409,14 @@ export default function PortfolioPage() {
 
         {/* 3x2 Grid of Tall Brand System Boards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {UI_CATEGORIES[1].items.map((item) => (
-            <Link
+          {UI_CATEGORIES[1].items.map((item, idx) => (
+            <button
               key={item.id}
-              to={`/work/${item.slug}`}
-              className="group block rounded-3xl overflow-hidden bg-[#121320] border border-white/10 p-3 hover:border-amber-400/50 hover:shadow-2xl transition-all duration-300"
+              id={`portfolio-card-${item.id}`}
+              onClick={(e) => openLightbox(UI_CATEGORIES[1].items, idx, e)}
+              className={`group block rounded-3xl overflow-hidden bg-[#121320] border border-white/10 p-3 hover:border-amber-400/50 hover:shadow-2xl transition-[border-color,box-shadow,transform] duration-300 will-change-transform text-left cursor-pointer ${
+                activeItemId === item.id ? 'opacity-0 pointer-events-none' : 'opacity-100'
+              }`}
             >
               <div className="aspect-[3/5] rounded-2xl overflow-hidden bg-black/40 relative">
                 <img
@@ -380,7 +431,7 @@ export default function PortfolioPage() {
                   {item.tag}
                 </span>
               </div>
-            </Link>
+            </button>
           ))}
         </div>
       </section>
@@ -423,11 +474,14 @@ export default function PortfolioPage() {
 
         {/* 4x4 Grid of Phone/Post Frames */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          {UI_CATEGORIES[2].items.map((item) => (
-            <Link
+          {UI_CATEGORIES[2].items.map((item, idx) => (
+            <button
               key={item.id}
-              to={`/work/${item.slug}`}
-              className="group block rounded-3xl overflow-hidden bg-[#121320] border border-white/10 p-2 sm:p-3 hover:border-amber-400/50 hover:shadow-xl transition-all duration-300"
+              id={`portfolio-card-${item.id}`}
+              onClick={(e) => openLightbox(UI_CATEGORIES[2].items, idx, e)}
+              className={`group block rounded-3xl overflow-hidden bg-[#121320] border border-white/10 p-2 sm:p-3 hover:border-amber-400/50 hover:shadow-xl transition-[border-color,box-shadow,transform] duration-300 will-change-transform text-left cursor-pointer ${
+                activeItemId === item.id ? 'opacity-0 pointer-events-none' : 'opacity-100'
+              }`}
             >
               {/* Instagram Phone Mock Frame */}
               <div className="rounded-2xl overflow-hidden bg-[#0c0d15] border border-white/5 flex flex-col">
@@ -454,7 +508,7 @@ export default function PortfolioPage() {
                   <span className="text-[10px] font-mono">{item.likes} likes</span>
                 </div>
               </div>
-            </Link>
+            </button>
           ))}
         </div>
       </section>
@@ -499,11 +553,14 @@ export default function PortfolioPage() {
 
         {/* 2x2 Grid of 16:9 Cinematic Video Thumbnails */}
         <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
-          {UI_CATEGORIES[3].items.map((item) => (
-            <Link
+          {UI_CATEGORIES[3].items.map((item, idx) => (
+            <button
               key={item.id}
-              to={`/work/${item.slug}`}
-              className="group block rounded-3xl overflow-hidden bg-[#121320] border border-white/10 p-3 hover:border-amber-400/50 hover:shadow-2xl transition-all duration-300"
+              id={`portfolio-card-${item.id}`}
+              onClick={(e) => openLightbox(UI_CATEGORIES[3].items, idx, e)}
+              className={`group block rounded-3xl overflow-hidden bg-[#121320] border border-white/10 p-3 hover:border-amber-400/50 hover:shadow-2xl transition-[border-color,box-shadow,transform] duration-300 will-change-transform text-left cursor-pointer ${
+                activeItemId === item.id ? 'opacity-0 pointer-events-none' : 'opacity-100'
+              }`}
             >
               <div className="aspect-video rounded-2xl overflow-hidden bg-black relative">
                 <img
@@ -518,7 +575,7 @@ export default function PortfolioPage() {
                   {item.tag}
                 </span>
               </div>
-            </Link>
+            </button>
           ))}
         </div>
       </section>
@@ -563,11 +620,14 @@ export default function PortfolioPage() {
 
         {/* 4x2 Grid of Product Module Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          {UI_CATEGORIES[4].items.map((item) => (
-            <Link
+          {UI_CATEGORIES[4].items.map((item, idx) => (
+            <button
               key={item.id}
-              to={`/work/${item.slug}`}
-              className="group block rounded-3xl overflow-hidden bg-[#121320] border border-white/10 p-2 sm:p-3 hover:border-amber-400/50 hover:shadow-xl transition-all duration-300"
+              id={`portfolio-card-${item.id}`}
+              onClick={(e) => openLightbox(UI_CATEGORIES[4].items, idx, e)}
+              className={`group block rounded-3xl overflow-hidden bg-[#121320] border border-white/10 p-2 sm:p-3 hover:border-amber-400/50 hover:shadow-xl transition-[border-color,box-shadow,transform] duration-300 will-change-transform text-left cursor-pointer ${
+                activeItemId === item.id ? 'opacity-0 pointer-events-none' : 'opacity-100'
+              }`}
             >
               <div className="aspect-[9/16] rounded-2xl overflow-hidden bg-black relative">
                 <img
@@ -582,7 +642,7 @@ export default function PortfolioPage() {
                   {item.tag}
                 </span>
               </div>
-            </Link>
+            </button>
           ))}
         </div>
       </section>
@@ -627,11 +687,14 @@ export default function PortfolioPage() {
 
         {/* Stack of Ultra-wide Banners */}
         <div className="space-y-8">
-          {UI_CATEGORIES[5].items.map((item) => (
-            <Link
+          {UI_CATEGORIES[5].items.map((item, idx) => (
+            <button
               key={item.id}
-              to={`/work/${item.slug}`}
-              className="group block rounded-3xl overflow-hidden bg-[#121320] border border-white/10 p-3 sm:p-4 hover:border-amber-400/50 hover:shadow-2xl transition-all duration-300"
+              id={`portfolio-card-${item.id}`}
+              onClick={(e) => openLightbox(UI_CATEGORIES[5].items, idx, e)}
+              className={`group block w-full rounded-3xl overflow-hidden bg-[#121320] border border-white/10 p-3 sm:p-4 hover:border-amber-400/50 hover:shadow-2xl transition-[border-color,box-shadow,transform] duration-300 will-change-transform text-left cursor-pointer ${
+                activeItemId === item.id ? 'opacity-0 pointer-events-none' : 'opacity-100'
+              }`}
             >
               <div className="aspect-[1920/820] rounded-2xl overflow-hidden bg-black relative">
                 <img
@@ -646,7 +709,7 @@ export default function PortfolioPage() {
                   {item.tag}
                 </span>
               </div>
-            </Link>
+            </button>
           ))}
         </div>
       </section>
@@ -668,6 +731,19 @@ export default function PortfolioPage() {
           </button>
         </div>
       </footer>
+
+      {/* ======================================================== */}
+      {/* LIGHTBOX OVERLAY                                          */}
+      {/* ======================================================== */}
+      <ImageLightbox
+        isOpen={lightboxOpen}
+        items={lightboxItems}
+        currentIndex={lightboxIndex}
+        originRect={originRect}
+        onClose={closeLightbox}
+        onNavigate={navigateLightbox}
+        onExited={handleLightboxExited}
+      />
     </div>
   )
 }

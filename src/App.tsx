@@ -6,7 +6,6 @@ import ProtectedRoute from '@/components/common/ProtectedRoute'
 // Public Pages
 import HomePage from '@/pages/public/HomePage'
 import PortfolioPage from '@/pages/public/PortfolioPage'
-import ProjectDetailPage from '@/pages/public/ProjectDetailPage'
 
 // Admin Pages
 import AdminLoginPage from '@/pages/admin/AdminLoginPage'
@@ -27,7 +26,7 @@ export default function App() {
       <Route element={<PublicLayout />}>
         <Route index element={<HomePage />} />
         <Route path="work" element={<PortfolioPage />} />
-        <Route path="work/:slug" element={<ProjectDetailPage />} />
+        {/* Old /work/:slug route removed — images now open in lightbox overlay */}
       </Route>
 
       {/* Admin Authentication */}
